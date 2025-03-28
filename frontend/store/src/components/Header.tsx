@@ -3,7 +3,7 @@ import assets from "../assets/assets"
 
 const Header = () => {
   return (
-    <div className="text-violet-600 bg-blue-700 flex flex-row justify-between py-5 items-center px-8 sm:px-16 md:px-32 lg:px-64">
+    <div className="text-violet-600 bg-black flex flex-row justify-between py-5 items-center px-8 sm:px-16 md:px-32 lg:px-64">
       <Link to="/"><img src={assets.logo} alt="" /></Link>
       
       <ul className="flex flex-row gap-8 text-white">
