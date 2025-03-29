@@ -19,7 +19,7 @@ const Shop: React.FC = () => {
    const { productdata, isloading } = shopContext;
 
    return (
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
          {isloading ? (
             <p>Loading products...</p>
          ) : (
