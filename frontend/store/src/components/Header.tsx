@@ -7,6 +7,10 @@ const Header = () => {
       <Link to="/"><img src={assets.logo} alt="" /></Link>
       
       <ul className="flex flex-row gap-8 text-white">
+         <NavLink to="/shop" className="flex flex-col items-center">
+            <p>SHOP</p>
+            <hr className="w-3/4 hidden"/>
+         </NavLink>
          <NavLink to="/nike" className="flex flex-col items-center">
             <p>NIKE</p>
             <hr className="w-3/4 hidden"/>

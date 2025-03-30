@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { ShopContext } from "../context/Shopcontext";
 import ProductCard from "../components/productCard";
+import ShopTitle from "../components/ShopTitle";
 
 const Shop: React.FC = () => {
    const shopContext = useContext(ShopContext);
@@ -19,20 +20,23 @@ const Shop: React.FC = () => {
    const { productdata, isloading } = shopContext;
 
    return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-         {isloading ? (
-            <p>Loading products...</p>
-         ) : (
-            productdata.map((product, index) => (
-              <ProductCard 
-              key={index}
-              id={index}
-              image={product.image[0]}
-              price={product.price}
-              name={product.name}
-              /> 
-            ))
-         )}
+      <div >
+         <ShopTitle/>
+         <div className="py-2 sm:py-4 md:py-6 lg:py-10  px-8 sm:px-16 md:px-32 lg:px-64 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {isloading ? (
+               <p>Loading products...</p>
+            ) : (
+               productdata.map((product, index) => (
+               <ProductCard 
+               key={index}
+               id={index}
+               image={product.image[0]}
+               price={product.price}
+               name={product.name}
+               /> 
+               ))
+            )}
+         </div>
       </div>
    );
 };

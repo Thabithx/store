@@ -20,7 +20,7 @@ const Nike: React.FC = () => {
 
    const nikeproducts = productdata.filter((item)=>item.category=="nike")
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-[#a4a4a4a6]'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-[#adadadae]'>
       {isloading?(
          <p>loading...</p>
       ):(
