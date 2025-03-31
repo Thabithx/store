@@ -16,11 +16,11 @@ const Adidas: React.FC = () => {
       return(<p>Context not available</p>)
    }
 
-   const {productdata,isloading} = shopContext
+   const {productdata,isloading,showSearch} = shopContext
 
    const adidasproducts = productdata.filter((item)=>item.category=="adidas")
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-[#dee5e9a6]'>
+    <div className={`${showSearch?"hidden":"grid"} grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-[#dee5e9a6]`}>
       {isloading?(
          <p>loading...</p>
       ):(

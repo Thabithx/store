@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { ShopContext } from "../context/Shopcontext";
 
 interface ProductCardProps {
   image: string;
@@ -8,8 +10,15 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ image, id, name, price }) => {
+
+const context = useContext(ShopContext);
+if (!context) {
+  throw new Error("useContext(ShopContext) must be used within a ShopContextProvider");
+}
+const { setSearch } = context;
+  
   return (
-    <Link to={`/product/${id}`} className="block">
+    <Link onClick={()=>setSearch("")} to={`/product/${id}`} className="block">
       <div className="relative pt-[100%] overflow-hidden">
         <img 
           className="absolute top-0 left-0 w-full h-full object-cover" 

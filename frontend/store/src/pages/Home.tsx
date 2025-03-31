@@ -1,6 +1,6 @@
 import Banner from "../components/Banner"
 import Featured from "../components/Featured"
-import Title from "../components/TItle"
+import Title from "../components/Title"
 
 const Home = () => {
 

@@ -8,11 +8,13 @@ import Checkout from "./pages/Checkout"
 import Nike from "./pages/Nike"
 import Adidas from "./pages/Adidas"
 import Puma from "./pages/Puma"
+import SearchBar from "./components/SearchBar"
 
 const App = () => {
   return (
     <>
       <Header/>
+      <SearchBar/>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
         <Route path="/shop" element={<Shop/>}></Route>
