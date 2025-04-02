@@ -21,7 +21,7 @@ const Featured:React.FC = () => {
       {isloading?(<p>Loading....</p>):(featuredProducts.map((featuredProducts,index)=>
       (
          <div className='w-full sm:w-1/3 md:w-[24%]'>
-            <ProductCard key={index} id={index} image={featuredProducts.image[0]} price={featuredProducts.price} name={featuredProducts.name}/>
+            <ProductCard key={index} id={featuredProducts._id} image={featuredProducts.image[0]} price={featuredProducts.price} name={featuredProducts.name}/>
          </div>
       )
       ))}

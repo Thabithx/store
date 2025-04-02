@@ -26,7 +26,7 @@ const Nike: React.FC = () => {
       ):(
          nikeproducts.map((product,index)=>(
             <ProductCard
-            key={index} id={index} 
+            key={index} id={product._id} 
             image={product.image[0]}
             price={product.price}
             name={product.name}

@@ -50,7 +50,7 @@ const SearchBar = () => {
             filteredProducts.map((product, index) => (
               <div key={index} className="pt-7 w-full sm:w-1/3 md:w-[24%] lg:w-[24%]">
                 <ProductCard
-                  id={product.id || index}
+                  id={product._id}
                   name={product.name}
                   price={product.price}
                   image={product.image[0]}
