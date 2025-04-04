@@ -11,6 +11,7 @@ import Puma from "./pages/Puma"
 import SearchBar from "./components/SearchBar"
 import SingleProduct from "./pages/SingleProduct"
 
+
 const App = () => {
   return (
     <>
