@@ -10,6 +10,8 @@ import Adidas from "./pages/Adidas"
 import Puma from "./pages/Puma"
 import SearchBar from "./components/SearchBar"
 import SingleProduct from "./pages/SingleProduct"
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
 
 
 const App = () => {
@@ -26,6 +28,8 @@ const App = () => {
         <Route path="/adidas" element={<Adidas/>}></Route>
         <Route path="/puma" element={<Puma/>}></Route>
         <Route path="/product/:id" element={<SingleProduct/>}></Route>
+        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/signup" element={<Signup/>}></Route>
       </Routes>
       <Footer/>
     </>

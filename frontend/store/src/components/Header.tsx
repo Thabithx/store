@@ -33,7 +33,7 @@ const Header = () => {
       </ul>
       <div className="flex flex-row items-center gap-3">
          <img className="w-8 invert brightness-0" onClick={()=>{setShowSearch(true)}} src={assets.search} alt="" />
-         <img className="w-8 invert brightness-0" src={assets.profile} alt="" />
+         <Link to={"/login"}><img className="w-8 invert brightness-0" src={assets.profile} alt="" /></Link>
          <Link to={"/cart"}>
             <img className="w-9 invert brightness-0" src={assets.cart} alt="" />
          </Link>
