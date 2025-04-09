@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ShopContext } from '../context/Shopcontext';
 import { Product } from '../types';
 import Title from '../components/Title';
@@ -6,12 +6,45 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
    const shopContext = useContext(ShopContext);
-   if(!shopContext){
-      console.log("COntext not found");
+
+   if (!shopContext) {
+      console.log("Context not found");
       throw new Error("ShopContext must be used within a ShopProvider");
    }
 
-   const {cartProducts,setCartProducts} = shopContext;
+   const { cartProducts, setCartProducts } = shopContext;
+
+   useEffect(() => {
+      const savedCart = localStorage.getItem('cart');
+      if (savedCart) {
+         setCartProducts(JSON.parse(savedCart));
+      }
+   }, [setCartProducts]);
+
+   useEffect(() => {
+      if (cartProducts && cartProducts.length > 0) {
+         localStorage.setItem('cart', JSON.stringify(cartProducts));
+      }
+   }, [cartProducts]);
+
+   const editQuantity = (id: string, quantity: string) => {
+      const updatedCartProducts = cartProducts.map((product: Product) => {
+         if (String(product._id) === id) {
+            return { ...product, cartquantity: Number(quantity) };
+         }
+         return product;
+      });
+      setCartProducts(updatedCartProducts);
+   };
+
+   let total: number = 0;
+   const calcualteTotal = () => {
+      cartProducts.forEach((product) => {
+         total += product.price * Number(product.cartquantity);
+      });
+   };
+
+   calcualteTotal();
 
    return (
       <div className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 py-10 h-[80vh]">
@@ -36,42 +69,50 @@ const Cart = () => {
 
                      <p className="text-center text-gray-700">${product.price.toFixed(2)}</p>
 
-                     <div className='flex items-center '>
-                     <div className='border-2 px-4 py-1 '>
-                        <button className='pr-1'  >&ndash;</button>
-                        <input className='focus:outline-none focus:ring-0 text-black px-3 w-14' type="number" value={product.cartquantity} min={1}/>
-                        <button className='pr-1' >+</button>
+                     <div className="flex items-center justify-center">
+                        <div className="border-2 px-4 py-1">
+                           <button onClick={() => editQuantity(String(product._id), String(Math.max(Number(product.cartquantity) - 1, 1)))}>–</button>
+                           <input
+                              className="text-black px-3 w-[80px] focus:outline-none focus:border-transparent text-center"
+                              type="text"
+                              value={product.cartquantity}
+                              min="1"
+                              onChange={(e) => {
+                                 let value = e.target.value;
+                                 if (value !== "") {
+                                    value = value.replace(/^0+/, "");
+                                 }
+                                 editQuantity(String(product._id), value);
+                              }}
+                           />
+                           <button onClick={() => editQuantity(String(product._id), String(Number(product.cartquantity) + 1))}>+</button>
+                        </div>
                      </div>
-                  </div>
 
-                     <p className="text-right text-gray-700">${(product.price * product.quantity).toFixed(2)}</p>
+                     <p className="text-right text-gray-700">${(Number(product.price) * Number(product.cartquantity)).toFixed(2)}</p>
+
                   </div>
                ))}
             </div>
          )}
-         <div className='flex justify-end pt-10'>
-            <div className='w-1/3'>
-               <div className='flex justify-between'>
-                  <p className='text-lg'>Subtotal</p>
-                  <p>$240.00</p>
+         <div className="flex justify-end pt-10">
+            <div className="w-1/3">
+               <div className="flex justify-between">
+                  <p className="text-lg">Subtotal</p>
+                  <p>${total}</p>
                </div>
-               <div className='pb-1 flex justify-between'>
-                  <p className='text-lg'>Shipping</p>
+               <div className="pb-1 flex justify-between">
+                  <p className="text-lg">Shipping</p>
                   <p>$0</p>
                </div>
                <hr />
-               <div className='pt-1 flex justify-between items-center'>
-                  <p className='text-xl font-bold'>Total</p>
-                  <p>$240.00</p>
+               <div className="pt-1 flex justify-between items-center">
+                  <p className="text-xl font-bold">Total</p>
+                  <p>${total}</p>
                </div>
                <Link to="/checkout">
                   <button
-                     className='w-full bg-black text-white px-5 py-2 my-3 active:bg-[#1f1f1fe3]'
-                     onClick={() => {
-                        localStorage.removeItem("cart");
-                        setCartProducts([]);
-                     }}
-                  >
+                     className="w-full bg-black text-white px-5 py-2 my-3 active:bg-[#1f1f1fe3]">
                      Proceed To Checkout
                   </button>
                </Link>

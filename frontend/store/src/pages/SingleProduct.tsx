@@ -10,7 +10,6 @@ const SingleProduct = () => {
    const { id } = useParams<{ id: string }>(); 
    const [imageIndex, setImageIndex] = useState(0);
    const [productSize, setProductSize] = useState("");
-   const [productCount, setProductCount] = useState(1);
    const [countValue, setCountValue] = useState("1");
 
    const shopContext = useContext(ShopContext);
@@ -37,26 +36,25 @@ const SingleProduct = () => {
    
    const addProduct = () => {
       if (!productSize) {
-         toast.error("Please select a size");
-         return;
+          toast.error("Please select a size");
+          return;
       }
-
+  
       const parsedValue = Number(countValue);
       if (!isNaN(parsedValue) && parsedValue > 0) {
-         setProductCount(parsedValue);
+          setCartProducts((previousItem: Product[]) => [
+              ...previousItem,
+              { ...product, cartsize: productSize, cartquantity: parsedValue }
+          ]);
+          toast.success("Product added to cart.");
       } else {
-         toast.error("Invalid quantity. Please enter a valid number.");
-         return;
+          toast.error("Invalid quantity. Please enter a valid number.");
       }
-
-      setCartProducts((previousItem: Product[]) => [
-         ...previousItem,
-         { ...product, cartsize: productSize, cartquantity: productCount }
-      ]);
-
-      setProductCount(1); 
-      toast.success("Product added to cart.");
-   };
+  
+      setCountValue("1");
+  };
+  
+  
    
    
 
