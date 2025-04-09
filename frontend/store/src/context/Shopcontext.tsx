@@ -29,6 +29,8 @@ const ShopContextProvider: React.FC<ShopContextProviderProps> = ({ children }) =
    const [showSearch, setShowSearch] = useState<boolean>(false);
    const [search, setSearch] = useState<string>("");
    const [cartProducts, setCartProducts] = useState<Product[]>([]);
+   
+   
 
    const fetchProductData = async () => {
       if (productdata.length > 0) return;

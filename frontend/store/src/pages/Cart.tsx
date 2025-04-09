@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext} from 'react';
 import { ShopContext } from '../context/Shopcontext';
 import { Product } from '../types';
 import Title from '../components/Title';
@@ -6,22 +6,12 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
    const shopContext = useContext(ShopContext);
-   const cartProducts = shopContext?.cartProducts || [];
-   const setCartProducts = shopContext?.setCartProducts || (() => {});
-   const setProductQuantity = shopContext?.setProductQuantity || (() => {});
+   if(!shopContext){
+      console.log("COntext not found");
+      throw new Error("ShopContext must be used within a ShopProvider");
+   }
 
-   useEffect(() => {
-      const savedCart = localStorage.getItem("cart");
-      if (savedCart) {
-         setCartProducts(JSON.parse(savedCart));
-      }
-   }, []);
-
-   useEffect(() => {
-      if (cartProducts.length > 0) {
-         localStorage.setItem("cart", JSON.stringify(cartProducts));
-      }
-   }, [cartProducts]);
+   const {cartProducts,setCartProducts} = shopContext;
 
    return (
       <div className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 py-10 h-[80vh]">
@@ -46,13 +36,13 @@ const Cart = () => {
 
                      <p className="text-center text-gray-700">${product.price.toFixed(2)}</p>
 
-                     <div className='flex items-center justify-center'>
-                        <div className='border-2 px-4 py-1 '>
-                          <button onClick={() => setProductQuantity(String(product._id), product.quantity - 1)} className='pr-1'>&ndash;</button>
-                          <input type="text" value={product.quantity} className='focus:outline-none focus:ring-0 text-black px-3 w-14' onChange={(e) => setProductQuantity(String(product._id), Number(e.target.value))} />
-                          <button onClick={() => setProductQuantity(String(product._id), product.quantity + 1)}>+</button>
-                        </div>
+                     <div className='flex items-center '>
+                     <div className='border-2 px-4 py-1 '>
+                        <button className='pr-1'  >&ndash;</button>
+                        <input className='focus:outline-none focus:ring-0 text-black px-3 w-14' type="number" value={product.cartquantity} min={1}/>
+                        <button className='pr-1' >+</button>
                      </div>
+                  </div>
 
                      <p className="text-right text-gray-700">${(product.price * product.quantity).toFixed(2)}</p>
                   </div>

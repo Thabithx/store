@@ -7,4 +7,6 @@ export interface Product {
    size: string[];
    image: string[];
    category: string;
+   cartsize?: string;
+   cartquantity?: number;
 }

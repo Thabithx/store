@@ -30,7 +30,10 @@ const Checkout = () => {
         
 
           <div>
-            <p>Shipping Method</p>
+            <p className=' font-bold mb-2'>Shipping Method</p>
+            <div className='px-3 py-1 text-sm border-gray-300 border w-full bg-[#e6e6e6]'>
+              <p className=''>Free Shipping</p>
+            </div>
           </div>
 
           <div>
